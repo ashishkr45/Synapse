@@ -2,6 +2,7 @@ import { Video, Reel, XIcon, LinkedInIcon, PinterestIcon, ShareIcon, DeleteIcon 
 import { CardProps } from "./spaceCard";
 import { YouTubeEmbed, InstagramEmbed, XEmbed, LinkedInEmbed, PinterestEmbed } from 'react-social-media-embed';
 import { lightPastelColors, darkPastelColors } from "./spaceCard";
+
 export type MediaType = 'youtube' | 'instagram' | 'twitter' | 'linkedin' | 'pinterest';
 
 interface MediaCardProps extends CardProps {
@@ -30,13 +31,13 @@ const getMediaConfig = (mediaType: MediaType) => {
       };
     case 'linkedin':
       return {
-        icon: LinkedInIcon, // You might want to create a LinkedIn icon
+        icon: LinkedInIcon,
         iconBg: "bg-blue-600",
         unavailableText: "LinkedIn post unavailable"
       };
     case 'pinterest':
       return {
-        icon: PinterestIcon, // You might want to create a Pinterest icon
+        icon: PinterestIcon,
         iconBg: "bg-red-500",
         unavailableText: "Pinterest pin unavailable"
       };
@@ -52,16 +53,26 @@ const renderEmbed = (mediaType: MediaType, url: string | undefined, unavailableT
     );
   }
 
+  const embedDiv = {
+    position: 'relative' as const,
+    zIndex: 1,
+    overflow: 'hidden',
+    pointerEvents: 'none' as const,
+    width: '100%',
+  };
+
+  const embedProps = {
+    url,
+    width: '100%',
+    height: 'auto',
+  };
+
   switch (mediaType) {
     case 'youtube':
       return (
         <div className="rounded-md overflow-hidden bg-gray-100 w-full">
-          <div className="aspect-video w-full">
-            <YouTubeEmbed 
-              url={url} 
-              width="100%" 
-              height="100%"
-            />
+          <div style={embedDiv}>
+            <YouTubeEmbed {...embedProps} />
           </div>
         </div>
       );
@@ -69,11 +80,19 @@ const renderEmbed = (mediaType: MediaType, url: string | undefined, unavailableT
     case 'instagram':
       return (
         <div className="rounded-md overflow-hidden bg-gray-100 w-full">
-          <div className="w-full" style={{ height: '400px', maxHeight: '400px' }}>
+          <div style={{
+            ...embedDiv,
+            height: '370px',  
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            transform: 'scale(2)',
+            transformOrigin: 'center center'
+          }}>
             <InstagramEmbed 
-              url={url} 
-              width="100%" 
-              height={400}
+              {...embedProps} 
+              height="100%" 
             />
           </div>
         </div>
@@ -82,11 +101,14 @@ const renderEmbed = (mediaType: MediaType, url: string | undefined, unavailableT
     case 'twitter':
       return (
         <div className="rounded-md overflow-hidden bg-gray-100 w-full">
-          <div className="w-full min-h-[150px]">
-            <XEmbed 
-              url={url} 
-              width="100%"
-            />
+          <div style={{...embedDiv,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            overflow: 'hidden',
+            transformOrigin: 'center center'
+          }}>
+            <XEmbed {...embedProps} />
           </div>
         </div>
       );
@@ -94,11 +116,8 @@ const renderEmbed = (mediaType: MediaType, url: string | undefined, unavailableT
     case 'linkedin':
       return (
         <div className="rounded-md overflow-hidden bg-gray-100 w-full">
-          <div className="w-full min-h-[200px]">
-            <LinkedInEmbed 
-              url={url} 
-              width="100%"
-            />
+          <div style={embedDiv}>
+            <LinkedInEmbed {...embedProps} />
           </div>
         </div>
       );
@@ -106,11 +125,8 @@ const renderEmbed = (mediaType: MediaType, url: string | undefined, unavailableT
     case 'pinterest':
       return (
         <div className="rounded-md overflow-hidden bg-gray-100 w-full">
-          <div className="w-full min-h-[300px]">
-            <PinterestEmbed 
-              url={url} 
-              width="100%"
-            />
+          <div style={embedDiv}>
+            <PinterestEmbed {...embedProps} />
           </div>
         </div>
       );
@@ -127,7 +143,7 @@ export const MediaEmbedCard = (props: MediaCardProps) => {
   };
 
   return (
-    <div className={`${isDarkMode ? 'bg-gray-800/30 border-slate-900' : 'bg-white border-gray-200'} rounded-xl border shadow-sm hover:shadow-2xl transition-all duration-300 w-full mb-4`}>
+    <article className={`${isDarkMode ? 'bg-gray-800/30 border-slate-900' : 'bg-white border-gray-200'} break-inside-avoid rounded-xl border shadow-sm hover:shadow-2xl transition-all duration-300 w-full mb-4`}>
       <div className="p-2">
         {/* Header */}
         <div className="flex items-center justify-between mb-3">
@@ -147,9 +163,11 @@ export const MediaEmbedCard = (props: MediaCardProps) => {
           </div>
         </div>
 
-        {/* Media Embed */}
+        {/* Media Embed - using the same approach as your working Card */}
         <div className="mb-3 w-full">
-          {renderEmbed(mediaType, url, unavailableText)}
+          <div className="text-sm overscroll-x-none overflow-hidden rounded-xl">
+            {renderEmbed(mediaType, url, unavailableText)}
+          </div>
         </div>
 
         {/* Footer */}
@@ -171,11 +189,11 @@ export const MediaEmbedCard = (props: MediaCardProps) => {
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
-// Legacy exports for backward compatibility (optional)
+// Legacy exports for backward compatibility
 export const YouTubeCard = (props: CardProps) => (
   <MediaEmbedCard {...props} mediaType="youtube" />
 );

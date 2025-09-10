@@ -76,7 +76,7 @@ export const Card = (props: CardProps) => {
 
   // Default card for other types - using consistent styling
   return (
-    <div className={`${isDarkMode ? 'bg-white border-gray-200' : 'bg-gray-800 border-y-gray-950'} rounded-lg border p-2 w-80 h-fit shadow-sm hover:shadow-md transition-shadow`}>
+    <div className={`${isDarkMode ? 'bg-white border-gray-200' : 'bg-gray-800 border-y-gray-950'} break-inside-avoid rounded-lg border p-2 w-full h-fit shadow-sm hover:shadow-md transition-shadow`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
