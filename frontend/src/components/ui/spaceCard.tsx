@@ -106,17 +106,17 @@ export const Card = (props: CardProps) => {
       <div className="text-xs text-gray-400 space-y-1">
           {tags && tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
-                    {tags.map((tag, index) => (
-                      <span 
-                        key={index}
-                        className={`${getTagColor(index, isDarkMode)} px-3 py-1 rounded-full text-sm border flex items-center gap-2 font-medium`}
-                      >
-                        <span className="truncate max-w-[200px]" title={tag}>
-                          {tag}
-                        </span>
-                      </span>
-                    ))}
-                  </div>
+              {tags.map((tag, index) => (
+                <span 
+                  key={index}
+                  className={`${getTagColor(index, isDarkMode)} px-3 py-1 rounded-full text-sm border flex items-center gap-2 font-medium`}
+                >
+                  <span className="truncate max-w-[200px]" title={tag}>
+                    {tag}
+                  </span>
+                </span>
+              ))}
+            </div>
           )}
           <div className="bg-slate-300 text-gray-700 border-slate-600 px-3 py-1 rounded-full text-sm border truncate max-w-[100px] font-medium">{new Date(time).toLocaleDateString()}</div>
         </div>

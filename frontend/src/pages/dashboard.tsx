@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Card } from '../components/ui/spaceCard';
 import CreateContentModel from '../components/createContentModel';
 import DashNavigation from '../components/dashNevBar';
-import { CardSkeleton } from '../components/ui/cardskeleton';
+import { CardSkeleton } from '../components/ui/CardSkeleton';
 
 const contentFormSchema = z.object({
   type: z.enum([
@@ -68,7 +68,7 @@ function Dashboard({ isDarkMode, toggleDarkMode }: DashboardProps) {
   };
 
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-[#191a1a]' : 'bg-[#eaeaea]'} transition-all ease-linear duration-300 pl-4 pr-4`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-[#282828]' : 'bg-[#eaeaea]'} transition-all ease-linear duration-300 pl-4 pr-4`}>
       <DashNavigation
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
@@ -93,17 +93,27 @@ function Dashboard({ isDarkMode, toggleDarkMode }: DashboardProps) {
         {isError && <p className="text-red-500">Error fetching your content.</p>}
         
         {content && (
-          <div className='columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 space-y-2'>
+          <div className='columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 max-w-[95%] mx-auto'>
             {content.map((item: any) => (
-              <Card
+              <div 
                 key={item._id}
-                type={item.type}
-                title={item.title}
-                tags={item.tags.map((tag: any) => tag.title)}
-                time={new Date(item.createdAt)}
-                url={item.link}
-                isDarkMode={isDarkMode}
-              />
+                className="break-inside-avoid mb-4"
+                style={{ 
+                  breakInside: 'avoid',
+                  pageBreakInside: 'avoid',
+                  display: 'inline-block',
+                  width: '100%'
+                }}
+              >
+                <Card
+                  type={item.type}
+                  title={item.title}
+                  tags={item.tags.map((tag: any) => tag.title)}
+                  time={new Date(item.createdAt)}
+                  url={item.link}
+                  isDarkMode={isDarkMode}
+                />
+              </div>
             ))}
           </div>
         )}

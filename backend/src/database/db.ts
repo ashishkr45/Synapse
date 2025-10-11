@@ -1,8 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose";
 import dotenv from "dotenv";
-import { string } from "zod";
-import { google } from "googleapis";
-import { request } from "express";
 dotenv.config();
 
 mongoose
@@ -10,7 +7,6 @@ mongoose
 	.then(() => { console.log("Connected to DB") })
 	.catch((errMessage) => { console.log(`MongoDB connection error: ${errMessage}`) });
 
-// User Schema
 const userSchema = new Schema({
 	email: {
 		type: String,

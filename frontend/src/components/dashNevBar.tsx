@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import SecBrainIcon from "../icons/SecBrainIcon";
 
 interface NavigationProps {
@@ -9,8 +8,6 @@ interface NavigationProps {
 }
 
 const DashNavigation: React.FC<NavigationProps> = ({ isDarkMode, toggleDarkMode, onAddContentClick }) => {
-  const navigate = useNavigate();
-
   return (
     <div className="w-full flex justify-center pt-4">
       <nav className={`z-10 fixed flex flex-wrap items-center px-4 md:px-8 py-2 rounded-4xl gap-2 md:gap-4 backdrop-blur-md border transition-colors duration-300 ${
@@ -37,7 +34,6 @@ const DashNavigation: React.FC<NavigationProps> = ({ isDarkMode, toggleDarkMode,
               ? 'hover:bg-gray-700/60 hover:text-blue-400 text-gray-300' 
               : 'hover:bg-neutral-400/40 hover:text-indigo-900 text-gray-700'
           }`}
-          // onClick={() => navigate("/")}
         >
           Share
         </button>
