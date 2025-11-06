@@ -43,8 +43,8 @@ export const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
+    width="17 "
+    height="17"
     viewBox="0 0 24 24"
     fill="currentColor"
     {...props}
@@ -167,4 +167,99 @@ export const Hash = ({ size, color = "#74777d" }: IconProps) => (
 		className={IconSizeVariants[size]}>
 		<path strokeLinecap="round" strokeLinejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5-3.9 19.5m-2.1-19.5-3.9 19.5" />
 	</svg>
+);
+
+// 🗂️ Generic File Icon
+export const FileIcon = ({ size, color = "#74777d" }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={color}
+    className={IconSizeVariants[size]}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M9 2.25H14.25L20.25 8.25V21a.75.75 0 01-.75.75H9A1.5 1.5 0 017.5 20.25V3.75A1.5 1.5 0 019 2.25z"
+    />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M14.25 2.25V8.25H20.25"
+    />
+  </svg>
+);
+
+// 💬 Quote Icon
+export const QuoteIcon = ({ size, color = "#74777d" }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={color}
+    className={IconSizeVariants[size]}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M7.5 8.25h4.5v7.5H6a3 3 0 003-3v-4.5zm9 0h4.5v7.5H15a3 3 0 003-3v-4.5z"
+    />
+  </svg>
+);
+
+// 🔖 Bookmark Icon
+export const BookmarkIcon = ({ size, color = "#74777d" }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={color}
+    className={IconSizeVariants[size]}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 3.75h12a.75.75 0 01.75.75V21l-6-3-6 3V4.5a.75.75 0 01.75-.75z"
+    />
+  </svg>
+);
+
+// 🧠 Code Icon
+export const CodeIcon = ({ size, color = "#74777d" }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={color}
+    className={IconSizeVariants[size]}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16.5 8.25l5.25 3.75-5.25 3.75m-9-7.5L2.25 12l5.25 3.75m3.75 5.25l2.25-15"
+    />
+  </svg>
+);
+
+// 📅 Calendar / Event Icon
+export const CalendarIcon = ({ size, color = "#74777d" }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke={color}
+    className={IconSizeVariants[size]}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6.75 3v2.25M17.25 3v2.25M3.75 7.5h16.5M4.5 21h15a1.5 1.5 0 001.5-1.5V7.5H3v12A1.5 1.5 0 004.5 21zM8.25 11.25h.008v.008H8.25v-.008zm0 3h.008v.008H8.25v-.008zm3-3h.008v.008H11.25v-.008zm0 3h.008v.008H11.25v-.008zm3-3h.008v.008H14.25v-.008zm0 3h.008v.008H14.25v-.008z"
+    />
+  </svg>
 );
