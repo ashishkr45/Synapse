@@ -50,7 +50,6 @@ const CreateContentModel = ({ open, onClose, isDarkMode, onSubmit }: CreateConte
     return pastelColors[index % pastelColors.length];
   };
 
-  // --- FIX: These functions were moved out of handleSubmit ---
   const addTag = () => {
     if (currentTag.trim() && !tags.includes(currentTag.trim())) {
       setTags([...tags, currentTag.trim()]);
