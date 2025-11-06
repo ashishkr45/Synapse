@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b backend/tsconfig.json",
-    "start": "node backend/dist/index.js",
     "backend": "npm run build && npm run start",
+    "build": "tsc -b tsconfig.json",
+    "start": "node dist/index.js",
     "watch": "tsc -b backend/tsconfig.json --watch"
   },
   "keywords": [],
