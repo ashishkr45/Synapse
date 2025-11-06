@@ -9,8 +9,9 @@ interface NavigationProps {
 
 const DashNavigation: React.FC<NavigationProps> = ({ isDarkMode, toggleDarkMode, onAddContentClick }) => {
   return (
-    <div className="w-full flex justify-center pt-4">
-      <nav className={`z-10 fixed flex flex-wrap items-center px-4 md:px-8 py-2 rounded-4xl gap-2 md:gap-4 backdrop-blur-md border transition-colors duration-300 ${
+    <div className="fixed top-0 left-0 w-full z-50 flex justify-center pt-4 pointer-events-auto">
+      <nav className={`flex flex-wrap items-center px-4 md:px-8 py-2 gap-2 md:gap-4 rounded-4xl 
+        backdrop-blur-md border transition-colors duration-300 ${
         isDarkMode 
           ? 'bg-gray-600/40 border-slate-300/30 text-gray-50' 
           : 'bg-slate-300/40 border-gray-600/30 text-gray-900'
@@ -55,8 +56,8 @@ const DashNavigation: React.FC<NavigationProps> = ({ isDarkMode, toggleDarkMode,
               <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
             </svg>
           )}
-        </button>       
-        
+        </button>
+                
         <button 
           onClick={onAddContentClick}
           className={`font-medium px-4 md:px-6 py-2 rounded-full transition-all duration-200 transform shadow-sm ml-2 md:ml-4 bg-blue-900/90 hover:bg-blue-600/80 text-white text-sm md:text-base`}
