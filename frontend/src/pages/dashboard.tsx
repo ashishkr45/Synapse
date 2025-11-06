@@ -41,6 +41,14 @@ const createNewContent = async (newContentData: ContentFormData) => {
   return response.data;
 };
 
+const deleteContent = async (id: string) => {
+  const token = localStorage.getItem('app_token');
+  if (!token) throw new Error("No authorization token found.");
+
+  await axios.delete(`http://localhost:3000/api/content/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
 
 interface DashboardProps {
   isDarkMode: boolean;
@@ -67,8 +75,22 @@ function Dashboard({ isDarkMode, toggleDarkMode }: DashboardProps) {
     createContentMutation.mutate(data);
   };
 
+  const deleteContentMutation = useMutation({
+    mutationFn: deleteContent,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['userContent'] });
+    },
+  });
+
+  const handleDelete = (id: string) => {
+    if (window.confirm("Are you sure you want to delete this card?")) {
+      deleteContentMutation.mutate(id);
+    }
+  };
+
+
   return (
-    <div className={`min-h-screen ${isDarkMode ? 'bg-[#282828]' : 'bg-[#eaeaea]'} transition-all ease-linear duration-300 pl-4 pr-4`}>
+    <div className={`min-h-screen ${isDarkMode ? 'bg-stone-900' : 'bg-[#eaeaea]'} transition-all ease-linear duration-300 pl-4 pr-4`}>
       <DashNavigation
         isDarkMode={isDarkMode}
         toggleDarkMode={toggleDarkMode}
@@ -110,8 +132,10 @@ function Dashboard({ isDarkMode, toggleDarkMode }: DashboardProps) {
                   title={item.title}
                   tags={item.tags.map((tag: any) => tag.title)}
                   time={new Date(item.createdAt)}
+                  notes={item.note}
                   url={item.link}
                   isDarkMode={isDarkMode}
+                  onDelete={() => handleDelete(item._id)} 
                 />
               </div>
             ))}
